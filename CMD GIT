@@ -34,38 +34,73 @@ git commit --amend -m "Añadido capítulo 3 sobre gestión de ramas al índice."
 git show
 
 2.EJERCICIOS DE MANEJO DEL HISTORIAL DE CAMBIOS
-
-git clone https://github.com/asalber/libro-git.git
-cd libro-git
-git reset --hard 8c808
-git remote remove origin
-
 EJERCICIO 1 
 git log
 mkdir capitulos
 cd capitulos 
 echo -e "Git es un sistema de control de versiones ideado por Linus Torvalds">capitulo1.txt
-git add
+git add .
 git commit -m "Añadido capítulo 1."
 git log
 
 EJERCICIO 2 
 cd capitulos
 echo -e "El flujo de trabajo básico con Git consiste en: 1- Hacer cambios en el repositorio. 2- Añadir los cambios a la zona de intercambio temporal. 3- Hacer un commit de los cambios.">capitulo2.txt
-git add
+git add .
 git commit -m "Añadido capítulo 2."
 git diff
 
 EJERCICIO 3
 cd capitulos
 echo -e "Git permite la creación de ramas lo que permite tener distintas versiones del mismo proyecto y trabajar de manera simultanea en ellas.">capitulo3.txt
-git add
+git add .
 git commit -m "Añadido capítulo 3."
 git log
 ......
 
 EJERCICIO 4 
 ......
-git add
+git add .
 git commit -m "Añadido capítulo 5 al índice."
 git annotate indice.txt
+
+3.EJERCICIOS GESTIÓN RAMAS
+EJERCICIO 1
+git branch bibliografia
+
+EJERCICIO 2
+mkdir capitulos
+cd capitulos
+echo -e "patata" > capitulo4.txt
+git add .
+git commit -m "Añadido capitulo 4"
+git log --graph --all --oneline
+
+EJERCICIO 3
+git checkout bibliografia
+echo -e "Chacon, S. and Straub, B. Pro Git. Apress." > bibliografia.txt
+git add .
+git commit -m "Añadida primera referencia bibliografica"
+git log --graph --all --oneline
+
+EJERCICIO 4
+git checkout master
+git merge bibliografia
+git branch -d bibliografia
+git log --graph --all --oneline
+
+EJERCICIO 5 
+git branch bibliografia
+git checkout bibliografia
+echo -e " Scott Chacon and Ben Straub. Pro Git. Apress. Ryan Hodson. Ry’s Git Tutorial. Smashwords (2014)" > bibliografia.txt
+git add .
+git commit -m "Añadida nueva referencia bibliografica"
+git checkout master
+echo -e " Chacon, S. and Straub, B. Pro Git. Apress. Loeliger, J. and McCullough, M. Version control with Git. O’Reilly." > bibliografia.txt
+git add .
+git commit -m "Añadida nueva referencia bibliografica"
+git merge bibliografia
+echo -e " Chacon, S. and Straub, B. Pro Git. Apress. Loeliger, J. and McCullough, M. Version control with Git.O’Reilly.  Hodson, R. Ry’s Git Tutorial. Smashwords (2014) > bibliografia.txt
+git add .
+git commit -m "Resuelto conflicto de bibliografia"
+git log --graph --all --oneline
